@@ -1,0 +1,1 @@
+# Medusa_lite_forCassandraBackups
