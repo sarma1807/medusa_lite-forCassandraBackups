@@ -134,7 +134,7 @@ grep -i "CREATE KEYSPACE" ${BACKUP_CQL_FOLDER}/${FULL_SCHEMA_SCRIPT} > ${BACKUP_
 echo -e "`date +'%I:%M:%S %p'` : generated cql script for CREATE KEYSPACEs and saved to ${BACKUP_CQL_FOLDER}/${CREATE_KS_SCRIPT}" >> ${LOGFILE}
 
 # capture cql for each keyspace
-CQL_KEYSPACES=`cqlsh --execute="DESCRIBE KEYSPACES ;" | xargs`
+CQL_KEYSPACES=`cqlsh --execute="DESCRIBE KEYSPACES ;" | egrep -v "5.0-alpha1" | xargs`
 echo -e "`date +'%I:%M:%S %p'` : KEYSPACES FOUND : ${CQL_KEYSPACES}" >> ${LOGFILE}
 echo -e "Total User Keyspaces : `wc -l ${BACKUP_CQL_FOLDER}/${CREATE_KS_SCRIPT} | cut -d" " -f1`" >> ${LOGFILE}
 for KS in ${CQL_KEYSPACES}
