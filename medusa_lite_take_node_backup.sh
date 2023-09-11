@@ -3,7 +3,7 @@
 
 ### https://github.com/sarma1807/medusa_lite-forCassandraBackups
 # medusa_lite for Cassandra Backups
-# script version : v01_20230419 : Sarma Pydipally
+# script version : v02_20230910 : Sarma Pydipally
 
 source ~/.bash_profile > /dev/null
 
@@ -63,7 +63,7 @@ else
   echo -e "</body></html>\n" >> ${MEDUSA_LITE_EMAIL}
   echo -e "<br><br>Report generated on ${CURRENT_HOST} @ `date +'%Y-%m-%d %H:%M:%S'` \n\n" >> ${MEDUSA_LITE_EMAIL}
   ### send email
-  cat ${MEDUSA_LITE_EMAIL} | /usr/sbin/sendmail -t
+  cat ${MEDUSA_LITE_EMAIL} | sendmail -t
   rm -f ${MEDUSA_LITE_EMAIL}
 
   exit 1
@@ -82,7 +82,7 @@ then
   echo -e "</body></html>\n" >> ${MEDUSA_LITE_EMAIL}
   echo -e "<br><br>Report generated on ${CURRENT_HOST} @ `date +'%Y-%m-%d %H:%M:%S'` \n\n" >> ${MEDUSA_LITE_EMAIL}
   ### send email
-  cat ${MEDUSA_LITE_EMAIL} | /usr/sbin/sendmail -t
+  cat ${MEDUSA_LITE_EMAIL} | sendmail -t
   rm -f ${MEDUSA_LITE_EMAIL}
 
   exit 1
@@ -167,7 +167,6 @@ tree -dfin --prune ${CASS_DATA_BASE_FOLDER} | grep ${BACKUP_TAG} > ${SOURCE_FOLD
 TARGET_FOLDERS_FILE=${CURRENT_BACKUP_FOLDER}/03_folder_move_list.txt
 MOVE_SNAPSHOTS_CMDS=${CURRENT_BACKUP_FOLDER}/04_move_snapshots.sh
 rm -f ${MOVE_SNAPSHOTS_CMDS}
-# SOURCE_FOLDERS=`cat ${SOURCE_FOLDERS_FILE} | grep umprmhdevgno`
 SOURCE_FOLDERS=`cat ${SOURCE_FOLDERS_FILE}`
 TMP_SNAP_SUFFIX=snapshots/${BACKUP_TAG}
 for SF in ${SOURCE_FOLDERS}
